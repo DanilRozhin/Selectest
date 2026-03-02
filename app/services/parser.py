@@ -1,10 +1,8 @@
 import logging
-from typing import List
 
 import httpx
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.core.config import settings
 from app.crud.vacancy import upsert_external_vacancies
 from app.schemas.external import ExternalVacanciesResponse
 
