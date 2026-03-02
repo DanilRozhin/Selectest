@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from sqlalchemy import Boolean, DateTime, Integer, String, UniqueConstraint, func
+from sqlalchemy import Boolean, DateTime, Integer, String, UniqueConstraint, func, text
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.db.base import Base
@@ -16,8 +16,8 @@ class Vacancy(Base):
     tag_name: Mapped[str] = mapped_column(String, nullable=False)
     city_name: Mapped[str | None] = mapped_column(String, nullable=True)
     published_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
-    is_remote_available: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
-    is_hot: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
+    is_remote_available: Mapped[bool] = mapped_column(Boolean, nullable=False, server_default=text("false"))
+    is_hot: Mapped[bool] = mapped_column(Boolean, nullable=False, server_default=text("false"))
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
         nullable=False,

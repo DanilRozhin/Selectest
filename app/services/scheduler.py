@@ -1,3 +1,4 @@
+from datetime import datetime
 from typing import Awaitable, Callable
 
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
@@ -10,8 +11,9 @@ def create_scheduler(job: Callable[[], Awaitable[None]]) -> AsyncIOScheduler:
     scheduler.add_job(
         job,
         trigger="interval",
-        seconds=settings.parse_schedule_minutes,
+        seconds=settings.parse_schedule_minutes * 60,
         coalesce=True,
         max_instances=1,
+        next_run_time=datetime.now(),
     )
     return scheduler
