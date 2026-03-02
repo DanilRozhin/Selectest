@@ -29,7 +29,6 @@ async def _run_parse_job() -> None:
 @app.on_event("startup")
 async def on_startup() -> None:
     logger.info("Запуск приложения")
-    await _run_parse_job()
     global _scheduler
     _scheduler = create_scheduler(_run_parse_job)
     _scheduler.start()
